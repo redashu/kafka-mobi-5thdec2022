@@ -180,3 +180,66 @@ kafka-delete-records.sh             kafka-reassign-partitions.sh        kafka-ve
 [2022-12-05 13:41:21,750] INFO Client environment:zookeeper.version=3.6.3--6401e4ad2087061bc6b9f80dec2d69f2e3c8660a, built on 04/08/2021 16:35 GMT (org.apache.zookeeper.ZooKeeper)
 [2022-12-05 13:41:21,751] INFO Client environment:host.na
 ```
+
+
+### above scripts are dependent on -- terminal / remote session 
+
+### lets create systemd service for them 
+
+### taking a copy of sshd.service for zookeeper and for kafka as well
+
+```
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ systemctl status sshd
+● sshd.service - OpenSSH server daemon
+   Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
+   Active: active (running) since Mon 2022-12-05 11:45:51 UTC; 2h 5min ago
+     Docs: man:sshd(8)
+           man:sshd_config(5)
+ Main PID: 3522 (sshd)
+   CGroup: /system.slice/sshd.service
+           ├─ 3522 /usr/sbin/sshd -D
+           ├─18934 sshd: root [priv]
+           └─18941 sshd: root [net]
+
+Dec 05 13:49:59 ip-172-31-56-93.ec2.internal sshd[18223]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh...80.241
+Dec 05 13:50:01 ip-172-31-56-93.ec2.internal sshd[18223]: Failed password for invalid user romeo from 177.15.80.241 port 31258 ssh2
+Dec 05 13:50:02 ip-172-31-56-93.ec2.internal sshd[18223]: Received disconnect from 177.15.80.241 port 31258:11: Bye Bye [preauth]
+Dec 05 13:50:02 ip-172-31-56-93.ec2.internal sshd[18223]: Disconnected from 177.15.80.241 port 31258 [preauth]
+Dec 05 13:51:36 ip-172-31-56-93.ec2.internal sshd[18889]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh...r=root
+Dec 05 13:51:38 ip-172-31-56-93.ec2.internal sshd[18889]: Failed password for root from 177.15.80.241 port 31267 ssh2
+Dec 05 13:51:40 ip-172-31-56-93.ec2.internal sshd[18889]: Received disconnect from 177.15.80.241 port 31267:11: Bye Bye [preauth]
+Dec 05 13:51:40 ip-172-31-56-93.ec2.internal sshd[18889]: Disconnected from 177.15.80.241 port 31267 [preauth]
+Dec 05 13:51:44 ip-172-31-56-93.ec2.internal sshd[18934]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh...r=root
+Dec 05 13:51:47 ip-172-31-56-93.ec2.internal sshd[18934]: Failed password for root from 27.71.238.138 port 58852 ssh2
+Hint: Some lines were ellipsized, use -l to show in full.
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ cp /usr/lib/systemd/system/sshd.service  .
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ 
+```
+
+### creating zookeeper.service file 
+
+```
+[Unit]
+Description=zookeeper service file 
+After=network.target 
+
+
+[Service]
+Type=notify
+ExecStart=/home/ec2-user/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh -daemon /home/ec2-user/kafka_2.13-3.3.1/config/zookeeper.properties
+ExecStop=/home/ec2-user/kafka_2.13-3.3.1/bin/zookeeper-server-stop.sh /home/ec2-user/kafka_2.13-3.3.1/config/zookeeper.properties 
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+###  copy it to then systemd location 
+
+```
+sudo cp  zookeeper.service  -v  /usr/lib/systemd/system/
+sudo systemctl daemon-reload 
+sudo systemctl start zookeeper.service
+```
