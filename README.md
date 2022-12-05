@@ -138,4 +138,45 @@ kafka-consumer-groups.sh      kafka-metadata-shell.sh      kafka-topics.sh
 
 ```
 
+### start zookeeper 
 
+```
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ls
+bin  config  libs  LICENSE  licenses  NOTICE  site-docs
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ./bin/zookeeper-server-start.sh   
+USAGE: ./bin/zookeeper-server-start.sh [-daemon] zookeeper.properties
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ./bin/zookeeper-server-start.sh   config/zookeeper.properties 
+[2022-12-05 13:39:12,260] INFO Reading configuration from: config/zookeeper.properties (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
+[2022-12-05 13:39:12,271] WARN config/zookeeper.properties is relative. Prepend ./ to indicate that you're sure! (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
+[2022-12-05 13:39:12,283] INFO clientPortAddress is 0.0.0.0:2181 (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
+[2022-12-05 13:39:12,284] INFO secureClientPort is not set (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
+[2022-12-05 13:39:12,284] INFO observerMasterPort is not set (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
+[2022-12-05 13:39:12,285] IN
+```
+
+### in another termianl start kafka as well
+
+```
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ls
+bin  config  libs  LICENSE  licenses  logs  NOTICE  site-docs
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ./bin/kafka-
+kafka-acls.sh                       kafka-dump-log.sh                   kafka-replica-verification.sh
+kafka-broker-api-versions.sh        kafka-features.sh                   kafka-run-class.sh
+kafka-cluster.sh                    kafka-get-offsets.sh                kafka-server-start.sh
+kafka-configs.sh                    kafka-leader-election.sh            kafka-server-stop.sh
+kafka-console-consumer.sh           kafka-log-dirs.sh                   kafka-storage.sh
+kafka-console-producer.sh           kafka-metadata-quorum.sh            kafka-streams-application-reset.sh
+kafka-consumer-groups.sh            kafka-metadata-shell.sh             kafka-topics.sh
+kafka-consumer-perf-test.sh         kafka-mirror-maker.sh               kafka-transactions.sh
+kafka-delegation-tokens.sh          kafka-producer-perf-test.sh         kafka-verifiable-consumer.sh
+kafka-delete-records.sh             kafka-reassign-partitions.sh        kafka-verifiable-producer.sh
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ./bin/kafka-server-start.sh    config/server.properties 
+[2022-12-05 13:41:20,934] INFO Registered kafka:type=kafka.Log4jController MBean (kafka.utils.Log4jControllerRegistration$)
+[2022-12-05 13:41:21,480] INFO Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation (org.apache.zookeeper.common.X509Util)
+[2022-12-05 13:41:21,684] INFO Registered signal handlers for TERM, INT, HUP (org.apache.kafka.common.utils.LoggingSignalHandler)
+[2022-12-05 13:41:21,688] INFO starting (kafka.server.KafkaServer)
+[2022-12-05 13:41:21,689] INFO Connecting to zookeeper on localhost:2181 (kafka.server.KafkaServer)
+[2022-12-05 13:41:21,737] INFO [ZooKeeperClient Kafka server] Initializing a new session to localhost:2181. (kafka.zookeeper.ZooKeeperClient)
+[2022-12-05 13:41:21,750] INFO Client environment:zookeeper.version=3.6.3--6401e4ad2087061bc6b9f80dec2d69f2e3c8660a, built on 04/08/2021 16:35 GMT (org.apache.zookeeper.ZooKeeper)
+[2022-12-05 13:41:21,751] INFO Client environment:host.na
+```
