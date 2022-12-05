@@ -57,11 +57,27 @@ Run "sudo yum update" to apply all updates.
 [ec2-user@ip-172-31-56-93 ~]$ 
 ```
 
-### from Windows 
+
+## Kafka Pre-requisite : 
+
+### jdk 11 & scala 
+
+### Install jdk11 in linux vm on amazon cloud 
+### using amazon corretto to install jdk in any platform 
 
 ```
+sudo amazon-linux-extras install java-openjdk11
+```
+
+### lets verify 
 
 ```
+ec2-user@ip-172-31-56-93 ~]$ java -version 
+openjdk version "11.0.16" 2022-07-19 LTS
+OpenJDK Runtime Environment (Red_Hat-11.0.16.0.8-1.amzn2.0.1) (build 11.0.16+8-LTS)
+OpenJDK 64-Bit Server VM (Red_Hat-11.0.16.0.8-1.amzn2.0.1) (build 11.0.16+8-LTS, mixed mode, sharing)
+```
+
 
 
 
