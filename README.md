@@ -1,1 +1,4 @@
-# kafka-mobi-5thdec2022
+# Training plan 
+
+<img src="plan.png">
+
