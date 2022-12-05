@@ -243,3 +243,16 @@ sudo cp  zookeeper.service  -v  /usr/lib/systemd/system/
 sudo systemctl daemon-reload 
 sudo systemctl start zookeeper.service
 ```
+
+
+### alternative to systemd you can use -daemon option 
+
+```
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ /home/ec2-user/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh -daemon  /home/ec2-user/kafka_2.13-3.3.1/config/zookeeper.properties
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ./bin/kafka-server-start.sh 
+USAGE: ./bin/kafka-server-start.sh [-daemon] server.properties [--override property=value]*
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ ./bin/kafka-server-start.sh -daemon config/server.properties 
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ 
+
+```
+
