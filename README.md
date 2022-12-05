@@ -8,5 +8,11 @@
 
 <img src="intro.png">
 
+### more about apache kafka
+
+<img src="info.png">
+
+
+
 
 
