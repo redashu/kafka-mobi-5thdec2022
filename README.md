@@ -149,4 +149,41 @@ ls  /
 [ashudata, zookeeper]
 ```
 
+### more info about zookeeper 
+
+<img src="zooc2.png">
+
+### adding 4lw in zookeeper config 
+
+```
+4lw.commands.whitelist=* 
+---
+167  sudo ./bin/zookeeper-server-stop.sh 
+  168  sudo ./bin/zookeeper-server-start.sh  config/zookeeper.properties 
+```
+
+### lets test it 
+
+```
+ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ echo "stat"  |   nc  localhost 2181  
+Zookeeper version: 3.6.3--6401e4ad2087061bc6b9f80dec2d69f2e3c8660a, built on 04/08/2021 16:35 GMT
+Clients:
+ /127.0.0.1:52304[0](queued=0,recved=1,sent=0)
+
+Latency min/avg/max: 0/0.0/0
+Received: 1
+Sent: 0
+Connections: 1
+Outstanding: 0
+Zxid: 0x3
+Mode: standalone
+Node count: 6
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ echo "ruok"  |   nc  localhost 2181  
+imok[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ 
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ 
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ echo "ruok"  |   nc  localhost 2181  ; echo 
+imok
+```
+
+
 
