@@ -185,5 +185,38 @@ imok[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$
 imok
 ```
 
+### Kafka cluster sizing -- with zookeeper 
 
+<img src="cls.png">
+
+### sample tempalte for kafka broker 1 
+
+```
+[root@ip-172-31-7-200 config]# cat  server.properties 
+# This configuration file is intended for use in ZK-based mode, where Apache ZooKeeper is required.
+# See kafka.server.KafkaConfig for additional details and defaults
+#
+
+############################# Server Basics #############################
+
+# The id of the broker. This must be set to a unique integer for each broker.
+broker.id=1
+
+advertised.listeners=PLAINTEXT://ip-172-31-7-200.ec2.internal:9092
+log.dirs=/var/log/kafka-logs
+num.partitions=5
+default.replication=2
+delete.topic.enable=true
+auto.create.topics.enable=true
+zookeeper.connect=ip-172-31-7-200.ec2.internal:2181,ip-172-31-8-128.ec2.internal:2181,ip-172-31-9-177.ec2.internal:2181/mobikafka
+############################# Socket Server Settings #############################
+
+
+```
+
+### now start kafka service 
+
+```
+/opt/kafka_2.13-3.3.1/bin/kafka-server-start.sh  -daemon /opt/kafka_2.13-3.3.1/config/server.properties
+```
 
