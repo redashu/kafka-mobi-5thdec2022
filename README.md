@@ -299,3 +299,22 @@ hello kafka topic with some broker how you are doing ?
 
 
 ```
+
+### doing topic testing from remote machine 
+
+```
+ec2-user@ip-172-31-56-93 ~]$ kafka-console-producer.sh --broker-list  ip-172-31-7-200.ec2.internal:9092  --topic ashu-app-logs  
+>hey i am ashutoshh singh 
+>sending message to same topic again 
+>^C[ec2-user@ip-172-31-56-93 ~]$ 
+[ec2-user@ip-172-31-56-93 ~]$ 
+[ec2-user@ip-172-31-56-93 ~]$ kafka-console-consumer.sh  --bootstrap-server ip-172-31-7-200.ec2.internal:9092  --topic ashu-app-logs --from-beginning  
+hey i am ashutoshh singh 
+sending message to same topic again 
+hello kafka topic with some broker how you are doing ?
+^CProcessed a total of 3 messages
+[ec2-user@ip-172-31-56-93 ~]$ 
+
+```
+
+
