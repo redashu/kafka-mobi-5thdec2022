@@ -34,10 +34,9 @@ export PATH
 
 ```
 cat /etc/rc.local
-zookeeper-server-start.sh  -daemon /home/ec2-user/kafka_2.13-3.3.1/config/zookeeper.properties
+/home/ec2-user/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh  -daemon /home/ec2-user/kafka_2.13-3.3.1/config/zookeeper.properties
 sleep 2 
-kafka-server-start.sh  -daemon /home/ec2-user/kafka_2.13-3.3.1/config/server.properties
-
+/home/ec2-user/kafka_2.13-3.3.1/bin/kafka-server-start.sh  -daemon /home/ec2-user/kafka_2.13-3.3.1/config/server.properties
 ---
 sudo chmod +x /etc/rc.local
 ```
