@@ -96,4 +96,57 @@ version-2
 snapshot.0
 ```
 
+### zookeeper more info 
+
+<img src="zoo1.png">
+
+### accessing zookeeper fs from local machine 
+
+```
+[ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ zookeeper-shell.sh  localhost:2181 
+Connecting to localhost:2181
+Welcome to ZooKeeper!
+JLine support is disabled
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+ls  /
+[zookeeper]
+help
+ZooKeeper -server host:port [-zk-tls-config-file <file>] cmd args
+        addWatch [-m mode] path # optional mode is one of [PERSISTENT, PERSISTENT_RECURSIVE] - default is PERSISTENT_RECURSIVE
+        addauth scheme auth
+        close 
+        config [-c] [-w] [-s]
+        connect host:port
+        create [-s] [-e] [-c] [-t ttl] path [data] [acl]
+        delete [-v version] path
+        deleteall path [-b batch size]
+        delquota [-n|-b] path
+        get [-s] [-w] path
+        getAcl [-s] path
+        getAllChildrenNumber path
+        getEphemerals path
+        history 
+        listquota path
+        ls [-s] [-w] [-R] path
+        printwatches on|off
+        quit 
+        reconfig [-s] [-v version] [[-file path] | [-members serverID=host:port1:port2;port3[,...]*]] | [-add serverId=host:port1:port2;port3[,...]]* [-remove serverId[,...]*]
+        redo cmdno
+        removewatches path [-c|-d|-a] [-l]
+        set [-s] [-v version] path data
+        setAcl [-s] [-v version] [-R] path acl
+        setquota -n|-b val path
+        stat [-w] path
+        sync path
+        version 
+Command not found: Command not found help
+create  /ashudata
+Created /ashudata
+ls  /
+[ashudata, zookeeper]
+```
+
 
