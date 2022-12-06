@@ -30,3 +30,15 @@ PATH=$PATH:$KAFKA_HOME/bin
 export PATH 
 [ec2-user@ip-172-31-56-93 kafka_2.13-3.3.1]$ source  ~/.bashrc 
 ```
+### making service persistent on boot of system 
+
+```
+cat /etc/rc.local
+zookeeper-server-start.sh  -daemon /home/ec2-user/kafka_2.13-3.3.1/config/zookeeper.properties
+sleep 2 
+kafka-server-start.sh  -daemon /home/ec2-user/kafka_2.13-3.3.1/config/server.properties
+
+---
+sudo chmod +x /etc/rc.local
+```
+
