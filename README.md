@@ -98,7 +98,7 @@ snapshot.0
 
 ### zookeeper more info 
 
-<img src="zoo1.png">
+<img src="zooc.png">
 
 ### accessing zookeeper fs from local machine 
 
