@@ -247,4 +247,37 @@ zookeeper.connect=ip-172-31-7-200.ec2.internal:2181,ip-172-31-8-128.ec2.internal
 
 ## COnnecting cluster and creating topics 
 
+### if you are have kafka 3.x then below error you may see
+
+
+```
+ec2-user@ip-172-31-7-200 ~]$ kafka-topics.sh   --zookeeper ip:2181/mobikafka  
+Exception in thread "main" joptsimple.UnrecognizedOptionException: zookeeper is not a recognized option
+	at joptsimple.OptionException.unrecognizedOption(OptionException.java:108)
+	at joptsimple.OptionParser.handleLongOptionToken(OptionParser.java:510)
+```
+
+### new option here is to create topics 
+
+```
+[ec2-user@ip-172-31-7-200 ~]$ kafka-topics.sh  --bootstrap-server   localhost:9092  --create --topic ashu-app-logs         --replication-factor 1 --partitions 3 
+Created topic ashu-app-logs.
+```
+
+### list the topics
+
+```
+[ec2-user@ip-172-31-7-200 ~]$ kafka-topics.sh  --bootstrap-server   localhost:9092  --list
+andre-app-logs
+anup-app-logs
+armando-app-logs
+ashu-app-logs
+bruno-app-logs
+dani-app-logs
+fjv-app-logs
+luis-passos-logs
+pooja-app-logs
+ricmlopes-app-logs
+
+```
 
