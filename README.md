@@ -281,3 +281,21 @@ ricmlopes-app-logs
 
 ```
 
+### lets use producers to create data on a topic 
+
+```
+[ec2-user@ip-172-31-7-200 ~]$ kafka-console-producer.sh --broker-list localhost:9092  --topic ashu-app-logs
+>hello kafka topic with some broker how you are doing ?
+>^C[ec2-user@ip-172-31-7-200 ~]$
+```
+
+### now we can use consumers to read data 
+
+```
+[ec2-user@ip-172-31-7-200 ~]$ kafka-console-consumer.sh  --bootstrap-server localhost:9092  --topic ashu-app-logs --from-beginning 
+hello kafka topic with some broker how you are doing ?
+^CProcessed a total of 1 messages
+[ec2-user@ip-172-31-7-200 ~]$ 
+
+
+```
