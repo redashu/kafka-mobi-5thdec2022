@@ -220,3 +220,6 @@ zookeeper.connect=ip-172-31-7-200.ec2.internal:2181,ip-172-31-8-128.ec2.internal
 /opt/kafka_2.13-3.3.1/bin/kafka-server-start.sh  -daemon /opt/kafka_2.13-3.3.1/config/server.properties
 ```
 
+## COnnecting cluster and creating topics 
+
+
