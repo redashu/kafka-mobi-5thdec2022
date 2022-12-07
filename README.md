@@ -12,7 +12,7 @@
 
 ### leader concept 
 
-<img src="leaderp.png">
+<img src="leardep.png">
 
 
 
