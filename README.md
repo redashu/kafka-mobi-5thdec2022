@@ -65,6 +65,14 @@ Topic: ashu-data2       TopicId: QdAxqybfQfaxXQwu8rP5tA PartitionCount: 3       
 [ashu@consumer ~]$ 
 ```
 
+### data accepted by kafka is in only bytes -- binary data 
+
+<img src="bin.png">
+
+### ack system in producer 
+
+<img src="ack.png">
+
 
 
 
