@@ -10,6 +10,11 @@
 
 <img src="kafka-connect.png">
 
+### leader concept 
+
+<img src="leaderp.png">
+
+
 
 
 
