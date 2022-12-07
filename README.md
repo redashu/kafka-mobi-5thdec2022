@@ -6,5 +6,11 @@
 
 <img src="kafkaw.png">
 
+### kafka client to kafka broker connection details 
+
+<img src="kafka-connect.png">
+
+
+
 
 
