@@ -128,5 +128,29 @@ for i in range(10):
 
 <img src="cg.png">
 
+## Performance Tunning is required 
+
+## OS point of view 
+
+### setting KAFKA_HEAP_Size
+
+```
+export KAFKA_HEAP_OPTS="-Xmx4g"
+```
+
+<p> remaining RAM will be considered as os pagging cache </p>
+
+<img src="ost.png">
+
+### tunning parameter for kafka server 
+
+```
+log.dirs=/var/log/kafka-logs
+log.retention.hours=170
+offsets.retention.minutes=1000
+num.partitions=5
+default.replication=2
+delete.topic.enable=false
+```
 
 
