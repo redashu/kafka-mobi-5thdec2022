@@ -124,3 +124,9 @@ for i in range(10):
 
 ```
 
+### COnsumer group 
+
+<img src="cg.png">
+
+
+
