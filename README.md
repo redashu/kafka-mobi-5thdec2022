@@ -151,6 +151,7 @@ offsets.retention.minutes=1000
 num.partitions=5
 default.replication=2
 delete.topic.enable=false
+message.max.bytes=1048576
 ```
 
 
