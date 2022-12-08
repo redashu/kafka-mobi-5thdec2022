@@ -94,4 +94,33 @@ for i in range(10):
 
 ```
 
+### getting more details 
+
+```
+#!/usr/bin/python3
+
+# importing kafka consumer library 
+from kafka import KafkaProducer
+import time
+# what kafkaproducer offer
+my_producer=KafkaProducer(bootstrap_servers='ip-172-31-7-200.ec2.internal:9092',compression_type='gzip',key_serializer=str.encode)
+# compression message to latency will improve 
+# using above stored object i will be sending message 
+for i in range(10):
+    
+    send_status1=my_producer.send('ashu-python-topic1',key='1234',value=b'hey i am ashu %d'%i)
+    send_status2=my_producer.send('ashu-python-topic1',key='007',value=b'hey i am drone %d'%i)
+    result1=send_status1.get(timeout=10)
+    result2=send_status2.get(timeout=11)
+    print("__________________________________")
+    print(result1.topic,result1.partition,result1.offset)
+    time.sleep(1)
+    print("______________")
+    print(result2.topic,result2.partition,result2.offset)
+    
+    my_producer.flush()
+
+
+
+```
 
