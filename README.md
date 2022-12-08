@@ -154,4 +154,42 @@ delete.topic.enable=false
 message.max.bytes=1048576
 ```
 
+### topic level tunning options 
+
+```
+--config <String: name=value>            A topic configuration override for the 
+                                           topic being created or altered. The  
+                                           following is a list of valid         
+                                           configurations:                      
+                                         	cleanup.policy                        
+                                         	compression.type                      
+                                         	delete.retention.ms                   
+                                         	file.delete.delay.ms                  
+                                         	flush.messages                        
+                                         	flush.ms                              
+                                         	follower.replication.throttled.       
+                                           replicas                             
+                                         	index.interval.bytes                  
+                                         	leader.replication.throttled.replicas 
+                                         	local.retention.bytes                 
+                                         	local.retention.ms                    
+                                         	max.compaction.lag.ms                 
+                                         	max.message.bytes                     
+                                         	message.downconversion.enable         
+                                         	message.format.version                
+                                         	message.timestamp.difference.max.ms   
+                                         	message.timestamp.type                
+                                         	min.cleanable.dirty.ratio             
+                                         	min.compaction.lag.ms                 
+                                         	min.insync.replicas                   
+                                         	preallocate                           
+                                         	remote.storage.enable                 
+                                         	retention.bytes                       
+                                         	retention.ms                          
+                                         	segment.bytes                         
+                                         	segment.index.bytes                   
+                                         	segment.jitter.ms                     
+                                         	segment.ms                            
+                                         	unclean.leader.election.enable 
+```
 
