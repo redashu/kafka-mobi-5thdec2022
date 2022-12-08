@@ -86,7 +86,7 @@ my_producer=KafkaProducer(bootstrap_servers='ip-172-31-7-200.ec2.internal:9092',
 # using above stored object i will be sending message 
 for i in range(10):
     
-    send_status=my_producer.send('ashu-python-topic1',b'hey i am 1234')
+    send_status=my_producer.send('ashu-python-topic1',b'hey i am ashu %d'%i)
     send_status.get(timeout=10)
     my_producer.flush()
     print(send_status)
