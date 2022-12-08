@@ -35,3 +35,63 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ```
 
+### lets write producer in python 
+
+```
+#!/usr/bin/python3
+
+# importing kafka consumer library 
+from kafka import KafkaProducer
+# what kafkaproducer offer
+my_producer=KafkaProducer(bootstrap_servers='ip-172-31-7-200.ec2.internal:9092')
+# using above stored object i will be sending message 
+send_status=my_producer.send('ashu-python-topic1','Hey i am ashutoshh ')
+print(send_status)
+
+
+```
+
+### error while running above code 
+
+<img src="error.png">
+
+### improve code 
+
+```
+#!/usr/bin/python3
+
+# importing kafka consumer library 
+from kafka import KafkaProducer
+# what kafkaproducer offer
+my_producer=KafkaProducer(bootstrap_servers='ip-172-31-7-200.ec2.internal:9092')
+# using above stored object i will be sending message 
+send_status=my_producer.send('ashu-python-topic1',b'Hey i am ashutoshh ')
+send_status.get(timeout=10)
+my_producer.flush()
+print(send_status)
+
+
+```
+
+###  more change
+
+```
+#!/usr/bin/python3
+
+# importing kafka consumer library 
+from kafka import KafkaProducer
+# what kafkaproducer offer
+my_producer=KafkaProducer(bootstrap_servers='ip-172-31-7-200.ec2.internal:9092',compression_type='gzip')
+# compression message to latency will improve 
+# using above stored object i will be sending message 
+for i in range(10):
+    
+    send_status=my_producer.send('ashu-python-topic1',b'hey i am 1234')
+    send_status.get(timeout=10)
+    my_producer.flush()
+    print(send_status)
+
+
+```
+
+
