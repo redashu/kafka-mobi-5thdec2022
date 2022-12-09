@@ -204,5 +204,29 @@ ls /
 [zookeeper]
 ```
 
+### kafka UI for existing cluster 
+
+```
+[ashu@consumer ~]$ docker  run --name ashukafaui  -itd --restart=always --add-host kafka:172.31.17.199 -p 1234:9000 -e JVM_OPTS="-Xmx64M" -e KAFKA_BROKERCONNECT=172.31.17.199:9092  -e SERVER_SERVLET_CONTEXTPATH="/"  obsidiandynamics/kafdrop
+Unable to find image 'obsidiandynamics/kafdrop:latest' locally
+latest: Pulling from obsidiandynamics/kafdrop
+e0b25ef51634: Pull complete 
+d1bd2bc15eb1: Pull complete 
+77d0de1fd7e0: Pull complete 
+b638505435dc: Pull complete 
+8bbf85e38402: Pull complete 
+1ceef1d1d525: Pull complete 
+643cf0d075ea: Pull complete 
+Digest: sha256:5337c9e0e2dee204bdde53e90cf97001f44fb9e8c3380340436efa844901a3f4
+Status: Downloaded newer image for obsidiandynamics/kafdrop:latest
+19c95d5c6e82bf44ef3705d13a442a1c083032e6f80d2ed3febb9ce95ab874e9
+[ashu@consumer ~]$ docker ps
+CONTAINER ID   IMAGE                      COMMAND         CREATED         STATUS         PORTS                                       NAMES
+19c95d5c6e82   obsidiandynamics/kafdrop   "/kafdrop.sh"   7 seconds ago   Up 4 seconds   0.0.0.0:1234->9000/tcp, :::1234->9000/tcp   ashukafaui
+[ashu@consumer ~]$ 
+
+```
+
+
 
 
