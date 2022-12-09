@@ -59,5 +59,66 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 tcp6       0      0 :::111                  :::*                    LISTEN      2760/rpcbind       
 ```
 
+## configure SSL serts for kafka setup 
+
+### creating self CA 
+
+```
+[root@producer ssl-certs]# mkdir  self-ca  zookeeper  kafkabr  kfclients zooclients 
+[root@producer ssl-certs]# cd self-ca/
+[root@producer self-ca]# openssl req -new -x509 -keyout ca-key -out ca-cert -days 3650
+Generating a 2048 bit RSA private key
+......+++
+.............+++
+writing new private key to 'ca-key'
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:IN
+State or Province Name (full name) []:RAJ
+Locality Name (eg, city) [Default City]:JAI
+Organization Name (eg, company) [Default Company Ltd]:adhoc
+Organizational Unit Name (eg, section) []:tech
+Common Name (eg, your name or your server's hostname) []:localhost
+Email Address []:
+[root@producer self-ca]# ls
+ca-cert  ca-key
+
+```
+
+### create certs for zookeeper server 
+
+```
+ keytool -keystore kafka.zookeeper.truststore.jks -alias ca-cert -import -file ../self-ca/ca-cert
+ keytool -keystore kafka.zookeeper.keystore.jks -alias zookeeper -validity 3650 -genkey -keyalg RSA -ext SAN=dns:localhost
+ keytool -keystore kafka.zookeeper.keystore.jks -alias zookeeper -certreq -file ca-request-zookeeper
+ ls
+ ca-request-zookeeper
+```
+### send above listed file to CA for signing 
+
+```
+openssl x509 -req -CA ../self-ca/ca-cert -CAkey ../self-ca/ca-key -in ca-request-zookeeper -out ca-signed-zookeeper -days 3650 -CAcreateserial
+
+ls
+ca-signed-zookeeper
+```
+
+### import ca cert and ca signed cert to zookeeper store 
+
+```
+keytool -keystore kafka.zookeeper.keystore.jks -alias ca-cert -import -file ../self-ca/ca-cert
+keytool -keystore kafka.zookeeper.keystore.jks -alias zookeeper -import -file ca-signed-zookeeper
+```
+
+
+
 
 
