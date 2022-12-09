@@ -227,6 +227,24 @@ CONTAINER ID   IMAGE                      COMMAND         CREATED         STATUS
 
 ```
 
+### KSQL docker container demo 
+
+```
+127  git clone https://github.com/confluentinc/ksql.git
+  128  ls
+  129  cd ksql/
+  130  ls
+  131  docker-compose up -d
+  132  history 
+  133  docker-compose ps
+  134  docker-compose  exec -it ksqldb-cli  bash 
+  135  docker-compose  exec -it ksqldb-cli  ksql 
+  136  history 
+  137  docker-compose ps
+  138  docker exec -it ksqldb-cli  ksql http://primary-ksqldb-server:8088
+```
+
+ ### 
 
 
 
