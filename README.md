@@ -118,6 +118,19 @@ keytool -keystore kafka.zookeeper.keystore.jks -alias ca-cert -import -file ../s
 keytool -keystore kafka.zookeeper.keystore.jks -alias zookeeper -import -file ca-signed-zookeeper
 ```
 
+### zookeeper conf file for ssl
+
+```
+secureClientPort=2182
+authProvider.x509=org.apache.zookeeper.server.auth.X509AuthenticationProvider
+serverCnxnFactory=org.apache.zookeeper.server.NettyServerCnxnFactory
+ssl.trustStore.location=/opt/kafka_2.13-3.3.1/ssl-certs/zookeeper/kafka.zookeeper.truststore.jks
+ssl.trustStore.password=Kafka@0
+ssl.keyStore.location=/opt/kafka_2.13-3.3.1/ssl-certs/zookeeper/kafka.zookeeper.keystore.jks
+ssl.keyStore.password=Kafka@0
+ssl.clientAuth=need
+```
+
 
 
 
