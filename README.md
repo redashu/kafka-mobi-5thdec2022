@@ -131,7 +131,78 @@ ssl.keyStore.password=Kafka@0
 ssl.clientAuth=need
 ```
 
+### zoo client can't connect without SSL conf 
 
+```
+t@producer zooclients]# zookeeper-shell.sh  localhost:2182
+Connecting to localhost:2182
+Welcome to ZooKeeper!
+JLine support is disabled
+[2022-12-09 11:04:41,058] WARN Session 0x0 for sever localhost/127.0.0.1:2182, Closing socket connection. Attempting reconnect except it is a SessionExpiredException. (org.apache.zookeeper.ClientCnxn)
+EndOfStreamException: Unable to read additional data from server sessionid 0x0, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:77)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:350)
+	at org.apache.zookeeper.ClientCnxn$S
+```
+
+### time to create SSL for ZOOclient also  same as for server we did 
+
+### 
+```
+134  keytool -keystore kafka.zooclient.truststore.jks -alias ca-cert -import -file ca-cert
+  135  keytool -keystore kafka.zooclient.truststore.jks -alias ca-cert -import -file ../self-ca/ca-cert
+  136  history 
+  137  ls
+  138  keytool -keystore kafka.zooclient.keystore.jks -alias zookeeper -validity 3650 -genkey -keyalg RSA -ext SAN=dns:localhost
+  139  ls
+  140  history 
+  141  ls
+  142  keytool -keystore kafka.zooclient .keystore.jks -alias zookeeper -certreq -file ca-request-zookeeper
+  143  ls
+  144  keytool -keystore kafka.zooclient.keystore.jks -alias zookeeper -certreq -file ca-request-zooclient
+  145  ls
+  146  openssl x509 -req -CA ../self-ca/ca-cert -CAkey ../self-ca/ca-key -in ca-request-zooclient -out ca-signed-zooclient -days 3650 -CAcreateserial
+  147  ls
+  148  keytool -keystore kafka.zooclient.keystore.jks -alias ca-cert -import -file ../self-ca/ca-cert
+  149  ls
+  150  history 
+  151  ls
+  152  keytool -keystore kafka.zooclient.keystore.jks -alias zookeeper -import -file ca-signed-zooclient
+```
+
+### creating ssl conf file to be used by shell client 
+
+cat clien-cert.properties 
+```
+[root@producer java-zoo-client]# cat  clien-cert.properties 
+# /opt/kafka_2.13-3.3.1/ssl-certs/zooclients  all the certs are present 
+zookeeper.connect=localhost:2182
+zookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty
+zookeeper.ssl.client.enable=true
+zookeeper.ssl.protocol=TLSv1.2
+zookeeper.ssl.truststore.location=/opt/kafka_2.13-3.3.1/ssl-certs/zooclients/kafka.zooclient.truststore.jks
+zookeeper.ssl.truststore.password=Kafka@0
+zookeeper.ssl.keystore.location=/opt/kafka_2.13-3.3.1/ssl-certs/zooclients/kafka.zooclient.keystore.jks
+zookeeper.ssl.keystore.password=Kafka@0
+# optinaal 
+zookeeper.set.acl=true
+
+```
+
+### How to connect zookeeper server -- either using shell /python / java 
+
+```
+[root@producer java-zoo-client]# zookeeper-shell.sh  localhost:2182  -zk-tls-config-file  clien-cert.properties  
+Connecting to localhost:2182
+Welcome to ZooKeeper!
+JLine support is disabled
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+ls /
+[zookeeper]
+```
 
 
 
